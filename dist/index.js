@@ -23,7 +23,8 @@ function default_1(options) {
             var styleFile = file.clone({ contents: false });
             styleFile.extname = ".json";
             styleFile.contents = new Buffer(JSON.stringify(styleguide, null, 2));
-            callback(null, styleFile);
+            this.push(styleFile);
+            callback();
         });
     });
 }
