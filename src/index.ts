@@ -23,7 +23,7 @@ export default function(fileName: string, options: Options) {
       .catch(err => callback(err, null))
       .then(styleguide => {
         var styleFile = file.clone({contents: false});
-        styleFile.basename = fileName || "styleguide.json";
+        styleFile.extname = ".json";
         styleFile.contents = new Buffer(JSON.stringify(styleguide, null, 2));
         callback(null, styleFile);
       })
