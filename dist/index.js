@@ -5,7 +5,8 @@ const guidestyle_1 = require('guidestyle');
 class Options {
 }
 exports.Options = Options;
-function default_1(fileName, options) {
+function default_1(options) {
+    options = options || new Options();
     return through.obj(function (file, encoding, callback) {
         if (file.isNull()) {
             callback(null, file);

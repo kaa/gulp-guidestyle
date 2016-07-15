@@ -5,7 +5,8 @@ import { Analyzer } from 'guidestyle'
 export class Options {
   syntax: string
 }
-export default function(fileName: string, options: Options) {
+export default function(options?: Options) {
+  options = options || new Options();
   return through.obj(function(file:gutil.File, encoding: string, callback: (err?: Error, data?: gutil.File) => void): void {
 
 		if (file.isNull()) {
