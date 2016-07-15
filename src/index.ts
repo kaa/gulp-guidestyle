@@ -1,8 +1,8 @@
 import * as gutil from 'gulp-util'
 import * as through from 'through2'
-import { Analyzer } from '../guidestyle/index'
+import { Analyzer } from 'guidestyle'
 
-class Options {
+export class Options {
   syntax: string
 }
 export default function(fileName: string, options: Options) {

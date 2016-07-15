@@ -13,6 +13,7 @@
   "author": "kaa",
   "license": "ISC",
   "dependencies": {
+    "guidestyle": "github:kaa/guidestyle",
     "gulp-util": "^3.0.7",
     "through2": "^2.0.1"
   }
