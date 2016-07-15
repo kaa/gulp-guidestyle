@@ -7,7 +7,7 @@ export class Options {
 }
 export default function(options?: Options) {
   options = options || new Options();
-  return through.obj(function(file:gutil.File, encoding: string, callback: (err?: Error, data?: gutil.File) => void): void {
+  return through.obj(function(file:gutil.File, encoding: string, callback: (err?: Error, data?: gutil.File) => void) {
 
 		if (file.isNull()) {
 			callback(null, file);
@@ -20,14 +20,13 @@ export default function(options?: Options) {
 		}
 
     let analyzer = new Analyzer();
-    analyzer.analyze(file.basename, options.syntax)
-      .catch(err => callback(err, null))
+    analyzer.analyze(file.path, options.syntax)
+      .catch(err => callback(new gutil.PluginError("gulp-guidestyle", err), null))
       .then(styleguide => {
         var styleFile = file.clone({contents: false});
         styleFile.extname = ".json";
         styleFile.contents = new Buffer(JSON.stringify(styleguide, null, 2));
-        this.push(styleFile);
-        callback();
+        callback(null, styleFile);
       })
   });
 };

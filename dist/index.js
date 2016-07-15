@@ -17,14 +17,13 @@ function default_1(options) {
             return;
         }
         let analyzer = new guidestyle_1.Analyzer();
-        analyzer.analyze(file.basename, options.syntax)
-            .catch(err => callback(err, null))
+        analyzer.analyze(file.path, options.syntax)
+            .catch(err => callback(new gutil.PluginError("gulp-guidestyle", err), null))
             .then(styleguide => {
             var styleFile = file.clone({ contents: false });
             styleFile.extname = ".json";
             styleFile.contents = new Buffer(JSON.stringify(styleguide, null, 2));
-            this.push(styleFile);
-            callback();
+            callback(null, styleFile);
         });
     });
 }
