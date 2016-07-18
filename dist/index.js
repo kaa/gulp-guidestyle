@@ -1,6 +1,7 @@
 "use strict";
 const gutil = require('gulp-util');
 const through = require('through2');
+const path = require('path');
 const guidestyle_1 = require('guidestyle');
 class Options {
 }
@@ -20,8 +21,8 @@ function default_1(options) {
         analyzer.analyze(file.path, options.syntax)
             .catch(err => callback(new gutil.PluginError("gulp-guidestyle", err), null))
             .then(styleguide => {
-            var styleFile = file.clone({ contents: false });
-            styleFile.extname = ".json";
+            var styleFile = file.clone();
+            styleFile.path = path.join(file.base, file.stem + ".json");
             styleFile.contents = new Buffer(JSON.stringify(styleguide, null, 2));
             callback(null, styleFile);
         });

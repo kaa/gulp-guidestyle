@@ -1,5 +1,6 @@
 import * as gutil from 'gulp-util'
 import * as through from 'through2'
+import * as path from 'path'
 import { Analyzer } from 'guidestyle'
 
 export class Options {
@@ -24,7 +25,7 @@ export default function(options?: Options) {
       .catch(err => callback(new gutil.PluginError("gulp-guidestyle", err), null))
       .then(styleguide => {
         var styleFile = file.clone();
-        styleFile.extname = ".json";
+        styleFile.path = path.join(file.base, file.stem+".json");
         styleFile.contents = new Buffer(JSON.stringify(styleguide, null, 2));
         callback(null, styleFile);
       })
