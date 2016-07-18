@@ -21,8 +21,9 @@ function default_1(options) {
         analyzer.analyze(file.path, options.syntax)
             .catch(err => callback(new gutil.PluginError("gulp-guidestyle", err), null))
             .then(styleguide => {
+            var basename = path.basename(file.path), stylename = basename.substr(0, basename.length - path.extname(basename).length);
             var styleFile = file.clone();
-            styleFile.path = path.join(file.base, file.stem + ".json");
+            styleFile.path = path.join(file.base, stylename + ".json");
             styleFile.contents = new Buffer(JSON.stringify(styleguide, null, 2));
             callback(null, styleFile);
         });
