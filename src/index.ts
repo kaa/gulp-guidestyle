@@ -23,7 +23,7 @@ export default function(options?: Options) {
     analyzer.analyze(file.path, options.syntax)
       .catch(err => callback(new gutil.PluginError("gulp-guidestyle", err), null))
       .then(styleguide => {
-        var styleFile = file.clone({contents: false});
+        var styleFile = file.clone();
         styleFile.extname = ".json";
         styleFile.contents = new Buffer(JSON.stringify(styleguide, null, 2));
         callback(null, styleFile);
