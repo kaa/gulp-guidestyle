@@ -4,7 +4,8 @@ import * as path from 'path'
 import { Analyzer } from 'guidestyle'
 
 export class Options {
-  syntax: string  
+  syntax: string;
+  ignore: string;
 }
 export default function(options?: Options) {
   options = options || new Options();
@@ -20,7 +21,7 @@ export default function(options?: Options) {
 			return;
 		}
 
-    let analyzer = new Analyzer();
+    let analyzer = new Analyzer(options);
     analyzer.analyze(file.path, options.syntax)
       .catch(err => callback(new gutil.PluginError("gulp-guidestyle", err), null))
       .then(styleguide => {

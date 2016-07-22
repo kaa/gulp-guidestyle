@@ -17,7 +17,7 @@ function default_1(options) {
             callback(new gutil.PluginError('gulp-guidestyle', 'Streaming not supported'));
             return;
         }
-        let analyzer = new guidestyle_1.Analyzer();
+        let analyzer = new guidestyle_1.Analyzer(options);
         analyzer.analyze(file.path, options.syntax)
             .catch(err => callback(new gutil.PluginError("gulp-guidestyle", err), null))
             .then(styleguide => {
