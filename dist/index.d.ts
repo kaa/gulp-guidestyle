@@ -1,5 +1,3 @@
-export declare class Options {
-    syntax: string;
-    ignore: string;
-}
-export default function (options?: Options): NodeJS.ReadWriteStream;
+import { Stream } from 'stream';
+import { AnalyzerOptions } from 'guidestyle';
+export default function (options?: AnalyzerOptions): Stream;
